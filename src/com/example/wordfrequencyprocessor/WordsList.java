@@ -6,6 +6,20 @@ public class WordsList {
     Words[] allWords = new Words[99999];
     int position = 0;
 
+    public String getFileLocation(String fileName){
+        try {
+            String jarFilePath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+            String jarDirectory = new File(jarFilePath).getParent();
+            String filePath = jarDirectory + File.separator + "TextFiles" + File.separator + fileName;
+            File file = new File(filePath);
+            return filePath;
+
+        } catch(Exception e) {
+
+        }
+        return null;
+    }
+
     public void addWordToList(Words tempWord) {
         allWords[position] = tempWord;
         position++;
@@ -13,7 +27,7 @@ public class WordsList {
 
     public void writeWordsToFile(String fileName) {
         try {
-            FileWriter fw = new FileWriter(fileName + ".txt", false);
+            FileWriter fw = new FileWriter(getFileLocation(fileName + ".txt"), false);
             for(int i = 0; i<position; i++) {
                 Words currentWord = allWords[i];
                 fw.write(currentWord.word + ",");
@@ -31,7 +45,7 @@ public class WordsList {
     public void readWordsToArray(String fileName) {
         position = 0;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName + ".txt"));
+            BufferedReader br = new BufferedReader(new FileReader(getFileLocation(fileName + ".txt")));
             String currentLine = br.readLine();
 
             while(currentLine != null)
@@ -210,7 +224,7 @@ public class WordsList {
 
     public void clearTextFile() {
         try {
-            FileWriter fw = new FileWriter("wordsTotal.txt");
+            FileWriter fw = new FileWriter(getFileLocation("wordsTotal.txt"));
             fw.close();
         }
         catch(Exception e) {

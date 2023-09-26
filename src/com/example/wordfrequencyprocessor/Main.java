@@ -1,6 +1,7 @@
 package com.example.wordfrequencyprocessor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -580,8 +581,26 @@ public class Main {
         }
     }
 
+    public void createTextDirectory(){
+        try {
+            String jarFilePath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+            String jarDirectory = new File(jarFilePath).getParent();
+            String directoryPath = jarDirectory + File.separator + "TextFiles";
+            File newDirectory = new File(directoryPath);
+            if (newDirectory.mkdir()) {
+                System.out.println("Directory has been created successfully");
+            }
+            else {
+                System.out.println("Directory cannot be created");
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         Main main = new Main();
+        main.createTextDirectory();
         //main.startProgram();
         main.initFrame();
     }
