@@ -3456,7 +3456,7 @@ telantar,3,true
 warung,3,true
 permanen,3,true
 entok,3,true
-tanaman,3,false
+tanaman,3,true
 keributan,3,false
 peralatan,3,false
 sontak,3,false
@@ -3908,7 +3908,7 @@ santigi,3,false
 merinding,3,false
 pelaut,3,false
 tengkorak,3,false
-korban,3,false
+korban,3,true
 membayar,3,false
 euforia,3,false
 satunya,3,true
@@ -4901,7 +4901,7 @@ menjangkau-jangkau,2,false
 adik-adik,2,false
 keturunan,2,false
 kebanggaan,2,false
-sultan,2,false
+sultan,2,true
 diwarisi,2,false
 terbalik,2,false
 n,2,false
@@ -5063,7 +5063,7 @@ simpai,2,false
 medula,2,false
 perdebatan,2,false
 memaksakan,2,false
-adam,2,false
+adam,2,true
 dibakar,2,false
 penerangan,2,false
 konstruktif,2,false
@@ -6849,7 +6849,7 @@ rengekan,1,false
 istri,1,true
 siong,1,false
 menyembul,1,false
-membangunkan,1,false
+membangunkan,1,true
 dipelihara,1,false
 terbatuk-batuk,1,false
 perapian,1,false
@@ -7310,7 +7310,7 @@ menyelami,1,false
 kara,1,false
 menerjunkan,1,false
 buntungnya,1,false
-ditangkap,1,false
+ditangkap,1,true
 disangga,1,false
 mencincang,1,false
 bakaryang,1,false

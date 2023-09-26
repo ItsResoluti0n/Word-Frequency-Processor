@@ -150,7 +150,11 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 if(cbxDecks.getSelectedItem() != null) {
                     String deckName = cbxDecks.getSelectedItem().toString();
-                    addAllTableRows(deckName);
+                    if (tfSearch.getText() == null) {
+                        addAllTableRows(deckName);
+                    } else {
+                        tableSearch();
+                    }
                     btnKnownToggle.setText("Hide");
                 }
             }
@@ -484,32 +488,47 @@ public class Main {
     public void btnHide_Show_Toggle() {
         String state = btnKnownToggle.getText();
         String deckName = cbxDecks.getSelectedItem().toString();
+        Words[] matchingWords;
+        String searchTerm = tfSearch.getText();
         if (deckName.equals("all")) {
             deckName = "wordsTotal";
         }
-        if (state.equals("Hide")) {
-            addAllTableRowsUnknown(deckName);
-            btnKnownToggle.setText("Show");
-        } else {
-            addAllTableRows(deckName);
-            btnKnownToggle.setText("Hide");
+        wordsList.readWordsToArray(deckName);
+        if (searchTerm.isEmpty()) {
+            if (state.equals("Hide")) {
+                addAllTableRowsUnknown(wordsList.allWords, wordsList.position);
+                btnKnownToggle.setText("Show");
+            } else {
+                addAllTableRows(deckName);
+                btnKnownToggle.setText("Hide");
+            }
+        }
+        else {
+            if (state.equals("Hide")) {
+                btnKnownToggle.setText("Show");
+                matchingWords = wordsList.searchMultipleWords(searchTerm, deckName);
+                addAllTableRowsUnknown(matchingWords, matchingWords.length);
+            } else {
+                btnKnownToggle.setText("Hide");
+                tableSearch();
+            }
         }
     }
 
-    public void addAllTableRowsUnknown(String deckName) {
-        wordsList.readWordsToArray(deckName);
+    public void addAllTableRowsUnknown(Words[] words, int myPosition) {
         theTableModel.setRowCount(0);
-        int myPosition = wordsList.position;
         for (int i = 0; i<myPosition; i++) {
-            Words tempWord = wordsList.allWords[i];
-            if(tempWord.known == false) {
-                String[] rowData = new String[3];
+            Words tempWord = words[i];
+            if (tempWord != null) {
+                if(!tempWord.known) {
+                    String[] rowData = new String[3];
 
-                rowData[0] = tempWord.word;
-                rowData[1] = Integer.toString(tempWord.frequency);
-                rowData[2] = "false";
+                    rowData[0] = tempWord.word;
+                    rowData[1] = Integer.toString(tempWord.frequency);
+                    rowData[2] = "false";
 
-                theTableModel.addRow(rowData);
+                    theTableModel.addRow(rowData);
+                }
             }
         }
         wordsList.allWords = new Words[99999];
@@ -536,7 +555,7 @@ public class Main {
         String deckName = cbxDecks.getSelectedItem().toString();
         Words[] matchingWords;
         theTableModel.setRowCount(0);
-        if(searchTerm.equals("")) {
+        if(searchTerm.isEmpty()) {
             addAllTableRows("wordsTotal");
         }
         else {

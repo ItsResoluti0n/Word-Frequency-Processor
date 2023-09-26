@@ -413,7 +413,7 @@ kedalam,1,false
 saku,1,true
 jaket,1,false
 bagian,1,true
-advertisement,1,false
+advertisement,1,true
 penyakitmu,1,true
 tanyanya,1,true
 empat,1,true
