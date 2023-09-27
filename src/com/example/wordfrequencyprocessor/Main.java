@@ -312,7 +312,11 @@ public class Main {
         cbxDecks.addItem("all");
 
         btnKnownToggle.setText("Hide");
-        addAllTableRows("wordsTotal");
+        if (tfSearch.getText().isEmpty()) {
+            addAllTableRows("wordsTotal");
+        } else {
+            tableSearch();
+        }
 
         pnlViewAll.remove(cbxDecks);
 
