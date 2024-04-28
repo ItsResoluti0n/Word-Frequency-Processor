@@ -1,0 +1,19 @@
+<launch4jConfig>
+  <headerType>gui</headerType>
+  <outfile>WordProcessor<\outfile>
+  <jar>WordFrequencyProcessor</jar>
+  <jre>
+    <path>JRE path (%VAR%)</path>
+    <requiresJdk>true|false</requiresJdk>
+    <requires64Bit>true|false</requires64Bit>
+    <minVersion>1.x.x[_xxx]|xxx[.xxx[.xxx]]</minVersion>
+    <maxVersion>1.x.x[_xxx]|xxx[.xxx[.xxx]]</maxVersion>
+    <!-- Heap sizes in MB and % of available memory. -->
+    <initialHeapSize>MB</initialHeapSize>
+    <initialHeapPercent>%</initialHeapPercent>
+    <maxHeapSize>MB</maxHeapSize>
+    <maxHeapPercent>%</maxHeapPercent>
+    <opt>text (%VAR%)</opt>
+    ...
+  </jre>
+</launch4jConfig>
