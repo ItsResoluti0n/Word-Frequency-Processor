@@ -12377,7 +12377,7 @@ sekolahsekolah,1,false
 shooting,1,false
 generator,1,false
 seasia,1,false
-tenggara,1,false
+tenggara,1,true
 luput,1,false
 anarkisme,1,false
 obat-obatan,1,false

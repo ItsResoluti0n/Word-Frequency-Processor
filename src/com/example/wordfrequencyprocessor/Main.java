@@ -1,7 +1,6 @@
 package com.example.wordfrequencyprocessor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -151,7 +150,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 if(cbxDecks.getSelectedItem() != null) {
                     String deckName = cbxDecks.getSelectedItem().toString();
-                    if (tfSearch.getText() == null) {
+                    if (tfSearch.getText().isEmpty()) {
                         addAllTableRows(deckName);
                     } else {
                         tableSearch();
@@ -312,11 +311,7 @@ public class Main {
         cbxDecks.addItem("all");
 
         btnKnownToggle.setText("Hide");
-        if (tfSearch.getText().isEmpty()) {
-            addAllTableRows("wordsTotal");
-        } else {
-            tableSearch();
-        }
+        addAllTableRows("wordsTotal");
 
         pnlViewAll.remove(cbxDecks);
 
@@ -449,9 +444,9 @@ public class Main {
         //a match then increment the frequency, if not then add the word
         //to the end of the list then set the frequency to 1
         text = text.toLowerCase().replace(",","").replace(".","").replace("/","").replace("'","").replace(";","").replace(":","").replace("+","").replace("=","").replace("_","").replace("2","").replace("1","").replace("!","")
-        .replace("?","").replace(")","").replace("(","").replace("…","").replace("{","").replace("{","").replace("[","").replace("]","").replace("*","").replace("&","").replace("^","").replace("%","").replace("$","")
-        .replace("£","").replace("`","").replace("~","").replace("#","").replace("\"","").replace("“","").replace("”","").replace("\n"," ").replace("1", "").replace("2", "").replace("3", "").replace("4", "").replace("5", "")
-        .replace("6", "").replace("7", "").replace("8", "").replace("9", "").replace("0", "").replace("°","").replace("²","").replace("\t"," ").replace("—","").replace("‘","").replace("‘","");
+                .replace("?","").replace(")","").replace("(","").replace("…","").replace("{","").replace("{","").replace("[","").replace("]","").replace("*","").replace("&","").replace("^","").replace("%","").replace("$","")
+                .replace("£","").replace("`","").replace("~","").replace("#","").replace("\"","").replace("“","").replace("”","").replace("\n"," ").replace("1", "").replace("2", "").replace("3", "").replace("4", "").replace("5", "")
+                .replace("6", "").replace("7", "").replace("8", "").replace("9", "").replace("0", "").replace("°","").replace("²","").replace("\t"," ").replace("—","").replace("‘","").replace("‘","");
 
         return text.split(" ");
     }
@@ -585,26 +580,8 @@ public class Main {
         }
     }
 
-    public void createTextDirectory(){
-        try {
-            String jarFilePath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-            String jarDirectory = new File(jarFilePath).getParent();
-            String directoryPath = jarDirectory + File.separator + "TextFiles";
-            File newDirectory = new File(directoryPath);
-            if (newDirectory.mkdir()) {
-                System.out.println("Directory has been created successfully");
-            }
-            else {
-                System.out.println("Directory cannot be created");
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) {
         Main main = new Main();
-        main.createTextDirectory();
         //main.startProgram();
         main.initFrame();
     }

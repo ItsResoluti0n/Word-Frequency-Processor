@@ -6,20 +6,6 @@ public class WordsList {
     Words[] allWords = new Words[99999];
     int position = 0;
 
-    public String getFileLocation(String fileName){
-        try {
-            String jarFilePath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-            String jarDirectory = new File(jarFilePath).getParent();
-            String filePath = jarDirectory + File.separator + "TextFiles" + File.separator + fileName;
-            File file = new File(filePath);
-            return filePath;
-
-        } catch(Exception e) {
-
-        }
-        return null;
-    }
-
     public void addWordToList(Words tempWord) {
         allWords[position] = tempWord;
         position++;
@@ -27,7 +13,7 @@ public class WordsList {
 
     public void writeWordsToFile(String fileName) {
         try {
-            FileWriter fw = new FileWriter(getFileLocation(fileName + ".txt"), false);
+            FileWriter fw = new FileWriter(fileName + ".txt", false);
             for(int i = 0; i<position; i++) {
                 Words currentWord = allWords[i];
                 fw.write(currentWord.word + ",");
@@ -45,7 +31,7 @@ public class WordsList {
     public void readWordsToArray(String fileName) {
         position = 0;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(getFileLocation(fileName + ".txt")));
+            BufferedReader br = new BufferedReader(new FileReader(fileName + ".txt"));
             String currentLine = br.readLine();
 
             while(currentLine != null)
@@ -110,12 +96,12 @@ public class WordsList {
         Words[] tempWords = Arrays.copyOf(allWords, position);
         int posNewWords = position;
         clearArray();
+        System.out.println(posNewWords);
         readWordsToArray("wordsTotal");
-        for(int i = 0; i<posNewWords-1; i++) {
+        for(int i = 0; i<posNewWords; i++) {
             //If the word in the tempWords array can not be found in the wordsTotal array then add it. If already present then update the existing frequency
             //Position holds the length of total words
             //Position new words originally held length of the new words but is now used to track
-
             int compResult = compareWord(tempWords[i].word);
             if (compResult == -1) {
                 allWords[position] = tempWords[i];
@@ -224,7 +210,7 @@ public class WordsList {
 
     public void clearTextFile() {
         try {
-            FileWriter fw = new FileWriter(getFileLocation("wordsTotal.txt"));
+            FileWriter fw = new FileWriter("wordsTotal.txt");
             fw.close();
         }
         catch(Exception e) {
